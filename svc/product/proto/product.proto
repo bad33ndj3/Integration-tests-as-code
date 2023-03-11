@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+option go_package = "./;proto";
+
+package ecommerce.product;
+
+message Product {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  float price = 4;
+}
+
+service ProductService {
+  rpc GetProducts(Empty) returns (ProductList) {}
+  rpc GetProductById(ProductId) returns (Product) {}
+  rpc CreateProduct(Product) returns (ProductId) {}
+  rpc UpdateProduct(Product) returns (Empty) {}
+}
+
+message ProductList {
+  repeated Product products = 1;
+}
+
+message ProductId {
+  string id = 1;
+}
+
+message Empty {}

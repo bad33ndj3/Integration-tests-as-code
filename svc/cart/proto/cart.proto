@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+option go_package = "./;proto";
+
+package ecommerce.cart;
+
+message CartItem {
+  string product_id = 1;
+  int32 quantity = 2;
+  int32 price = 3;
+}
+
+message Cart {
+  string user_id = 1;
+  repeated CartItem items = 2;
+  int32 total_price = 3;
+}
+
+service CartService {
+  rpc GetCart(CartUserId) returns (Cart) {}
+  rpc AddCartItem(CartItemRequest) returns (Empty) {}
+  rpc RemoveCartItem(CartItemRequest) returns (Empty) {}
+}
+
+message CartUserId {
+  string user_id = 1;
+}
+
+message CartItemRequest {
+  string user_id = 1;
+  string product_id = 2;
+}
+
+message Empty {}
